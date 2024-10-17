@@ -19,7 +19,7 @@ class SpotifySession
     protected $request;
 
     /**
-     * The SpotifyWebAPI\Session instance.
+     * The spotify session instance.
      *
      * @var \SpotifyWebAPI\Session
      */
@@ -83,9 +83,9 @@ class SpotifySession
     /**
      * Refresh the access and refresh token.
      *
-     * @return void
+     * @return string The access token.
      */
-    public function refreshTokens()
+    public function refreshTokens(): string
     {
         $refresh_token = Cache::get('spotify_refresh_token');
 
@@ -95,15 +95,15 @@ class SpotifySession
 
         $this->session->refreshAccessToken($refresh_token);
 
-        $this->storeTokens();
+        return $this->storeTokens();
     }
 
     /**
      * Store the access and refresh token to cache.
      *
-     * @return void
+     * @return string The access token.
      */
-    public function storeTokens()
+    public function storeTokens(): string
     {
         $access_token = $this->session->getAccessToken();
         $refresh_token = $this->session->getRefreshToken();
@@ -111,6 +111,8 @@ class SpotifySession
 
         Cache::put('spotify_access_token', $access_token, $expires_in);
         Cache::put('spotify_refresh_token', $refresh_token);
+
+        return $access_token;
     }
 
     /**
