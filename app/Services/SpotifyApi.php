@@ -36,6 +36,18 @@ class SpotifyApi
     }
 
     /**
+     * Get an album.
+     *
+     * @param string $albumId ID or URI of the album.
+     *
+     * @return array|object The requested album.
+     */
+    public function getAlbum(string $album_id): array|object
+    {
+        return $this->api->getAlbum($album_id);
+    }
+
+    /**
      * Set the SpotifyWebAPI object to use.
      *
      * @return void

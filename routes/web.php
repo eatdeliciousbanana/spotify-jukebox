@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpotifyLoginController;
 use Illuminate\Foundation\Application;
@@ -30,5 +31,7 @@ Route::get('/auth/spotify', [SpotifyLoginController::class, 'redirectToSpotify']
 
 Route::get('/auth/spotify/callback', [SpotifyLoginController::class, 'handleSpotifyCallback'])
     ->name('login.spotify.callback');
+
+Route::get('/album/{id}', [AlbumController::class, 'show'])->name('album');
 
 require __DIR__.'/auth.php';
