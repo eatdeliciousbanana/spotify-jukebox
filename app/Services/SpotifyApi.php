@@ -38,13 +38,37 @@ class SpotifyApi
     /**
      * Get an album.
      *
-     * @param string $albumId ID or URI of the album.
+     * @param string $album_id ID or URI of the album.
      *
      * @return array|object The requested album.
      */
     public function getAlbum(string $album_id): array|object
     {
         return $this->api->getAlbum($album_id);
+    }
+
+    /**
+     * Get an artist.
+     *
+     * @param string $artist_id ID or URI of the artist.
+     *
+     * @return array|object The requested artist.
+     */
+    public function getArtist(string $artist_id): array|object
+    {
+        return $this->api->getArtist($artist_id);
+    }
+
+    /**
+     * Get an artist's albums.
+     *
+     * @param string $artist_id ID or URI of the artist.
+     *
+     * @return array|object The artist's albums.
+     */
+    public function getArtistAlbums(string $artist_id): array|object
+    {
+        return $this->api->getArtistAlbums($artist_id);
     }
 
     /**

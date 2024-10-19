@@ -3,6 +3,12 @@ export interface User {
     avatar: string;
 }
 
+export interface Artist {
+    id: string;
+    image: string;
+    name: string;
+}
+
 export interface Album {
     album_type: string;
     total_tracks: number;
@@ -10,18 +16,12 @@ export interface Album {
     image: string;
     name: string;
     release_date: string;
-    artists: {
-        id: string;
-        name: string;
-    }[];
+    artists: Artist[];
     tracks: Track[];
 }
 
 export interface Track {
-    artists: {
-        id: string;
-        name: string;
-    }[];
+    artists: Artist[];
     duration_ms: number;
     name: string;
     track_number: number;

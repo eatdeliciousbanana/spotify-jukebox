@@ -1,4 +1,5 @@
 import { Track } from "@/types";
+import { Link } from "@inertiajs/react";
 
 interface TrackTableProps {
     tracks: Track[];
@@ -43,8 +44,16 @@ const TrackTable = ({ tracks }: TrackTableProps) => {
                                     <p className="text-sm">
                                         {track.artists.map((artist, key) => (
                                             <span key={key}>
-                                                {(key > 0 ? ", " : "") +
-                                                    artist.name}
+                                                {key > 0 ? ", " : ""}
+                                                <Link
+                                                    className="hover:underline"
+                                                    href={route(
+                                                        "artist.show",
+                                                        artist.id
+                                                    )}
+                                                >
+                                                    {artist.name}
+                                                </Link>
                                             </span>
                                         ))}
                                     </p>

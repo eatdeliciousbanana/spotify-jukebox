@@ -1,4 +1,5 @@
 import { Album } from "@/types";
+import { Link } from "@inertiajs/react";
 
 interface AlbumCardProps {
     album: Album;
@@ -25,7 +26,13 @@ const AlbumCard = ({ album }: AlbumCardProps) => {
                     <span className="text-base font-medium">
                         {album.artists.map((artist, key) => (
                             <span key={key}>
-                                {(key > 0 ? ", " : "") + artist.name}
+                                {key > 0 ? ", " : ""}
+                                <Link
+                                    className="hover:underline"
+                                    href={route("artist.show", artist.id)}
+                                >
+                                    {artist.name}
+                                </Link>
                             </span>
                         ))}
                         {` • ${album.release_date.split("-")[0]} • ${
