@@ -21,7 +21,7 @@ class AlbumController extends Controller
     {
         $album = $this->api->getAlbum($id);
 
-        return Inertia::render('Album', [
+        return Inertia::render('Album/Show', [
             'album' => new AlbumResource($album),
         ]);
     }

@@ -32,6 +32,6 @@ Route::get('/auth/spotify', [SpotifyLoginController::class, 'redirectToSpotify']
 Route::get('/auth/spotify/callback', [SpotifyLoginController::class, 'handleSpotifyCallback'])
     ->name('login.spotify.callback');
 
-Route::get('/album/{id}', [AlbumController::class, 'show'])->name('album');
+Route::get('/album/{id}', [AlbumController::class, 'show'])->name('album.show');
 
 require __DIR__.'/auth.php';
