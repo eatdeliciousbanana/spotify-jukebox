@@ -18,7 +18,7 @@ class ArtistAlbumsResource extends JsonResource
             return [
                 'album_type' => $v->album_type,
                 'id' => $v->id,
-                'image' => $v->images[0]->url,
+                'image' => $v->images[0]->url ?? '',
                 'name' => $v->name,
                 'release_date' => $v->release_date,
             ];

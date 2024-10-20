@@ -21,6 +21,7 @@ export interface Album {
 }
 
 export interface Track {
+    album?: Album;
     artists: Artist[];
     duration_ms: number;
     name: string;

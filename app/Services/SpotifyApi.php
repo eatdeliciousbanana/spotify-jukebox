@@ -72,6 +72,19 @@ class SpotifyApi
     }
 
     /**
+     * Search for an item.
+     *
+     * @param string $query The term to search for.
+     * @param string|array $type The type of item to search for.
+     *
+     * @return array|object The search results.
+     */
+    public function search(string $query, string|array $type): array|object
+    {
+        return $this->api->search($query, $type);
+    }
+
+    /**
      * Set the SpotifyWebAPI object to use.
      *
      * @return void

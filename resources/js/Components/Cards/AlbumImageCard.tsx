@@ -3,9 +3,10 @@ import { Link } from "@inertiajs/react";
 
 interface AlbumImageCardProps {
     album: Album;
+    showArtist: boolean;
 }
 
-const AlbumImageCard = ({ album }: AlbumImageCardProps) => {
+const AlbumImageCard = ({ album, showArtist }: AlbumImageCardProps) => {
     const capitalize = (string: string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
@@ -23,9 +24,19 @@ const AlbumImageCard = ({ album }: AlbumImageCardProps) => {
                     {album.name}
                 </h4>
                 <span className="text-base font-medium">
-                    {`${album.release_date.split("-")[0]} • ${capitalize(
-                        album.album_type
-                    )}`}
+                    {`${album.release_date.split("-")[0]} • `}
+                    {showArtist ? (
+                        <Link
+                            className="hover:underline"
+                            href={route("artist.show", album.artists[0].id)}
+                            as="button"
+                            type="button"
+                        >
+                            {album.artists[0].name}
+                        </Link>
+                    ) : (
+                        capitalize(album.album_type)
+                    )}
                 </span>
             </div>
         </Link>

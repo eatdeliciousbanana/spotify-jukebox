@@ -3,9 +3,10 @@ import { Link } from "@inertiajs/react";
 
 interface TrackTableProps {
     tracks: Track[];
+    showImage: boolean;
 }
 
-const TrackTable = ({ tracks }: TrackTableProps) => {
+const TrackTable = ({ tracks, showImage }: TrackTableProps) => {
     const msToSec = (ms: number) => {
         const minutes = Math.floor(ms / 60000);
         const seconds = Math.floor((ms % 60000) / 1000);
@@ -32,10 +33,23 @@ const TrackTable = ({ tracks }: TrackTableProps) => {
                     <tbody>
                         {tracks.map((track, key) => (
                             <tr key={key}>
-                                <td className="border-b border-[#eee] w-13 py-4 px-4 dark:border-strokedark">
-                                    <p className="text-black dark:text-white">
-                                        {track.track_number}
-                                    </p>
+                                <td
+                                    className={`border-b border-[#eee] w-13 dark:border-strokedark ${
+                                        !showImage && "py-4 px-4"
+                                    }`}
+                                >
+                                    {showImage ? (
+                                        <img
+                                            src={
+                                                track.album && track.album.image
+                                            }
+                                            alt="Album"
+                                        />
+                                    ) : (
+                                        <p className="text-black dark:text-white">
+                                            {track.track_number}
+                                        </p>
+                                    )}
                                 </td>
                                 <td className="border-b border-[#eee] py-4 px-4 dark:border-strokedark">
                                     <h5 className="font-medium text-black dark:text-white">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SpotifyLoginController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::get('/auth/spotify', [SpotifyLoginController::class, 'redirectToSpotify']
 
 Route::get('/auth/spotify/callback', [SpotifyLoginController::class, 'handleSpotifyCallback'])
     ->name('login.spotify.callback');
+
+Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 
 Route::get('/artist/{id}', [ArtistController::class, 'show'])->name('artist.show');
 

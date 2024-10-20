@@ -14,7 +14,11 @@ const Show = ({ artist, albums }: ShowProps) => {
             <ArtistCard artist={artist} />
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 2xl:gap-7.5">
                 {albums.map((album, key) => (
-                    <AlbumImageCard key={key} album={album} />
+                    <AlbumImageCard
+                        key={key}
+                        album={album}
+                        showArtist={false}
+                    />
                 ))}
             </div>
         </>

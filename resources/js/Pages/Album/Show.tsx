@@ -12,7 +12,7 @@ const Show = ({ album }: ShowProps) => {
         <>
             <AlbumCard album={album} />
             <div className="flex flex-col gap-10">
-                <TrackTable tracks={album.tracks} />
+                <TrackTable tracks={album.tracks} showImage={false} />
             </div>
         </>
     );
