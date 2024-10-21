@@ -1,18 +1,18 @@
-import { Track } from "@/types";
+import { Track, ModalOptions } from "@/types";
+import { msToSec } from "@/utils";
 import { Link } from "@inertiajs/react";
 
 interface TrackTableProps {
     tracks: Track[];
     showImage: boolean;
+    setModalOptions: React.Dispatch<React.SetStateAction<ModalOptions>>;
 }
 
-const TrackTable = ({ tracks, showImage }: TrackTableProps) => {
-    const msToSec = (ms: number) => {
-        const minutes = Math.floor(ms / 60000);
-        const seconds = Math.floor((ms % 60000) / 1000);
-        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-    };
-
+const TrackTable = ({
+    tracks,
+    showImage,
+    setModalOptions,
+}: TrackTableProps) => {
     return (
         <div className="rounded-sm bg-white px-5 pt-6 pb-2.5 shadow-default dark:bg-boxdark sm:px-7.5 xl:pb-1">
             <div className="max-w-full overflow-x-auto">
@@ -32,7 +32,16 @@ const TrackTable = ({ tracks, showImage }: TrackTableProps) => {
                     </thead>
                     <tbody>
                         {tracks.map((track, key) => (
-                            <tr key={key}>
+                            <tr
+                                key={key}
+                                onClick={() =>
+                                    setModalOptions({
+                                        show: true,
+                                        track: track,
+                                    })
+                                }
+                                className="hover:bg-whiten dark:hover:bg-boxdark-2"
+                            >
                                 <td
                                     className={`border-b border-[#eee] w-13 dark:border-strokedark ${
                                         !showImage && "py-4 px-4"
@@ -65,6 +74,9 @@ const TrackTable = ({ tracks, showImage }: TrackTableProps) => {
                                                         "artist.show",
                                                         artist.id
                                                     )}
+                                                    onClick={(e) =>
+                                                        e.stopPropagation()
+                                                    }
                                                 >
                                                     {artist.name}
                                                 </Link>

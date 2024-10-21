@@ -24,6 +24,7 @@ class AlbumResource extends JsonResource
             'artists' => array_map(fn($v) => ['id' => $v->id, 'name' => $v->name], $this->artists),
             'tracks' => array_map(function ($v) {
                 return [
+                    'album' => ['image' => $this->images[2]->url ?? ''],
                     'artists' => array_map(fn($_v) => ['id' => $_v->id, 'name' => $_v->name], $v->artists),
                     'duration_ms' => $v->duration_ms,
                     'name' => $v->name,

@@ -29,6 +29,11 @@ export interface Track {
     uri: string;
 }
 
+export interface ModalOptions {
+    show: boolean;
+    track: Track | null;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
 > = T & {

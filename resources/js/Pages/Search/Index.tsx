@@ -1,8 +1,10 @@
-import { Album, Artist, Track } from "@/types";
-import SearchForm from "@/Components/Form/SearchForm";
+import { useState } from "react";
+import { Album, Artist, Track, ModalOptions } from "@/types";
+import SearchForm from "@/Components/Forms/SearchForm";
 import ArtistImageCard from "@/Components/Cards/ArtistImageCard";
 import AlbumImageCard from "@/Components/Cards/AlbumImageCard";
 import TrackTable from "@/Components/Tables/TrackTable";
+import RequestModal from "@/Components/Modals/RequestModal";
 import DefaultLayout from "@/Layouts/DefaultLayout";
 
 interface IndexProps {
@@ -18,6 +20,18 @@ interface IndexProps {
 }
 
 const Index = ({ filters, results }: IndexProps) => {
+    const [modalOptions, setModalOptions] = useState<ModalOptions>({
+        show: false,
+        track: null,
+    });
+
+    const closeModal = () => {
+        setModalOptions({
+            ...modalOptions,
+            show: false,
+        });
+    };
+
     return (
         <>
             <SearchForm filters={filters} />
@@ -44,9 +58,19 @@ const Index = ({ filters, results }: IndexProps) => {
 
             {results.tracks.length > 0 && (
                 <div className="mt-6 flex flex-col gap-10">
-                    <TrackTable tracks={results.tracks} showImage={true} />
+                    <TrackTable
+                        tracks={results.tracks}
+                        showImage={true}
+                        setModalOptions={setModalOptions}
+                    />
                 </div>
             )}
+
+            <RequestModal
+                show={modalOptions.show}
+                track={modalOptions.track}
+                onClose={closeModal}
+            />
         </>
     );
 };

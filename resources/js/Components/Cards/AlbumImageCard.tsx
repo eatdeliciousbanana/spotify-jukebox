@@ -1,4 +1,5 @@
 import { Album } from "@/types";
+import { capitalize } from "@/utils";
 import { Link } from "@inertiajs/react";
 
 interface AlbumImageCardProps {
@@ -7,10 +8,6 @@ interface AlbumImageCardProps {
 }
 
 const AlbumImageCard = ({ album, showArtist }: AlbumImageCardProps) => {
-    const capitalize = (string: string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-
     return (
         <Link
             className="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark"
