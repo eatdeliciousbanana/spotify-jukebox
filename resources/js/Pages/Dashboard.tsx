@@ -1,17 +1,20 @@
 import { useState } from "react";
-import { ModalOptions, Playback, Track } from "@/types";
+import { Playback, Track, ModalOptions } from "@/types";
 import RefreshButton from "@/Components/Buttons/RefreshButton";
 import PlaybackCard from "@/Components/Cards/PlaybackCard";
+import TableSwitchButton from "@/Components/Buttons/TableSwitchButton";
 import TrackTable from "@/Components/Tables/TrackTable";
 import RequestModal from "@/Components/Modals/RequestModal";
 import DefaultLayout from "@/Layouts/DefaultLayout";
 
 interface DashboardProps {
     playback: Playback;
+    queue: Track[];
     recent: Track[];
 }
 
-const Dashboard = ({ playback, recent }: DashboardProps) => {
+const Dashboard = ({ playback, queue, recent }: DashboardProps) => {
+    const [table, setTable] = useState("queue");
     const [modalOptions, setModalOptions] = useState<ModalOptions>({
         show: false,
         track: null,
@@ -32,9 +35,11 @@ const Dashboard = ({ playback, recent }: DashboardProps) => {
 
             <PlaybackCard playback={playback} />
 
+            <TableSwitchButton table={table} setTable={setTable} />
+
             <div className="flex flex-col gap-10">
                 <TrackTable
-                    tracks={recent}
+                    tracks={table === "queue" ? queue : recent}
                     showImage={true}
                     setModalOptions={setModalOptions}
                 />
