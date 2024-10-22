@@ -18,22 +18,17 @@ const RequestModal = ({ show, track, onClose }: RequestModalProps) => {
 
                 <div className="p-3 sm:p-4 flex justify-between items-center">
                     <div className="flex items-center">
-                        <img
-                            src={track && track.album ? track.album.image : ""}
-                            alt="Album"
-                        />
+                        <img src={track?.album?.image} alt="Album" />
                         <div className="pl-4">
                             <h5 className="font-medium text-black">
-                                {track && track.name}
+                                {track?.name}
                             </h5>
                             <p className="text-sm">
-                                {track &&
-                                    track.artists.map((artist, key) => (
-                                        <span key={key}>
-                                            {(key > 0 ? ", " : "") +
-                                                artist.name}
-                                        </span>
-                                    ))}
+                                {track?.artists.map((artist, key) => (
+                                    <span key={key}>
+                                        {(key > 0 ? ", " : "") + artist.name}
+                                    </span>
+                                ))}
                             </p>
                         </div>
                     </div>

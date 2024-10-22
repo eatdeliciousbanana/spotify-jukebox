@@ -1,26 +1,56 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { useState } from "react";
+import { ModalOptions, Playback, Track } from "@/types";
+import RefreshButton from "@/Components/Buttons/RefreshButton";
+import PlaybackCard from "@/Components/Cards/PlaybackCard";
+import TrackTable from "@/Components/Tables/TrackTable";
+import RequestModal from "@/Components/Modals/RequestModal";
+import DefaultLayout from "@/Layouts/DefaultLayout";
 
-export default function Dashboard() {
-    return (
-        <AuthenticatedLayout
-            header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Dashboard
-                </h2>
-            }
-        >
-            <Head title="Dashboard" />
-
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            You're logged in!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </AuthenticatedLayout>
-    );
+interface DashboardProps {
+    playback: Playback;
+    recent: Track[];
 }
+
+const Dashboard = ({ playback, recent }: DashboardProps) => {
+    const [modalOptions, setModalOptions] = useState<ModalOptions>({
+        show: false,
+        track: null,
+    });
+
+    const closeModal = () => {
+        setModalOptions({
+            ...modalOptions,
+            show: false,
+        });
+    };
+
+    return (
+        <>
+            <div className="mb-2">
+                <RefreshButton />
+            </div>
+
+            <PlaybackCard playback={playback} />
+
+            <div className="flex flex-col gap-10">
+                <TrackTable
+                    tracks={recent}
+                    showImage={true}
+                    setModalOptions={setModalOptions}
+                />
+            </div>
+
+            <RequestModal
+                show={modalOptions.show}
+                track={modalOptions.track}
+                onClose={closeModal}
+            />
+        </>
+    );
+};
+
+Dashboard.layout = (page: React.ReactNode) => (
+    <DefaultLayout title="Dashboard" children={page} />
+);
+
+export default Dashboard;

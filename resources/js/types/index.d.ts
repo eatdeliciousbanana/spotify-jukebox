@@ -34,6 +34,11 @@ export interface ModalOptions {
     track: Track | null;
 }
 
+export interface Playback {
+    is_playing: boolean;
+    track: Track | null;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
 > = T & {

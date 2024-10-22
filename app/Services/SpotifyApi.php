@@ -85,6 +85,36 @@ class SpotifyApi
     }
 
     /**
+     * Get the current user’s current playback information.
+     *
+     * @return array|object|null The user's playback information or null if nothing's currently playing.
+     */
+    public function getMyCurrentPlaybackInfo(): array|object|null
+    {
+        return $this->api->getMyCurrentPlaybackInfo();
+    }
+
+    /**
+     * Get the current user’s queue.
+     *
+     * @return array|object The currently playing song and queue.
+     */
+    public function getMyQueue()
+    {
+        return $this->api->getMyQueue();
+    }
+
+    /**
+      * Get the current user’s recently played tracks.
+      *
+      * @return array|object The most recently played tracks.
+      */
+    public function getMyRecentTracks(): array|object
+    {
+        return $this->api->getMyRecentTracks();
+    }
+
+    /**
      * Set the SpotifyWebAPI object to use.
      *
      * @return void

@@ -49,9 +49,7 @@ const TrackTable = ({
                                 >
                                     {showImage ? (
                                         <img
-                                            src={
-                                                track.album && track.album.image
-                                            }
+                                            src={track.album?.image}
                                             alt="Album"
                                         />
                                     ) : (
