@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\SearchController;
@@ -41,5 +42,7 @@ Route::get('/artist/{id}', [ArtistController::class, 'show'])->name('artist.show
 Route::get('/album/{id}', [AlbumController::class, 'show'])->name('album.show');
 
 Route::post('/queue', [QueueController::class, 'store'])->name('queue.store');
+
+Route::get('/player', [PlayerController::class, 'index'])->name('player.index');
 
 require __DIR__.'/auth.php';

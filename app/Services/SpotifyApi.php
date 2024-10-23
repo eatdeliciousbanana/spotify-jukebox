@@ -172,6 +172,16 @@ class SpotifyApi
     }
 
     /**
+     * Get the current user’s devices.
+     *
+     * @return array|object The user's devices.
+     */
+    public function getMyDevices(): array|object
+    {
+        return $this->api->getMyDevices();
+    }
+
+    /**
      * Set the SpotifyWebAPI object to use.
      *
      * @return void
