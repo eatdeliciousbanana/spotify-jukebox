@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Head } from "@inertiajs/react";
 import Header from "@/Components/Header/index";
 import Sidebar from "@/Components/Sidebar/index";
+import FlashMessages from "@/Components/Messages/FlashMessages";
 
 interface DefaultLayoutProps {
     title?: string;
@@ -27,6 +28,7 @@ const DefaultLayout = ({ title, children }: DefaultLayoutProps) => {
                         />
                         <main>
                             <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+                                <FlashMessages />
                                 {children}
                             </div>
                         </main>

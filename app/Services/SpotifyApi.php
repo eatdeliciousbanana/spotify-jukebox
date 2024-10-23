@@ -115,6 +115,18 @@ class SpotifyApi
     }
 
     /**
+     * Add an item to the queue.
+     *
+     * @param string $track_uri Required. Track ID, track URI or episode URI to queue.
+     *
+     * @return bool Whether the track was successfully queued.
+     */
+    public function queue(string $track_uri): bool
+    {
+        return $this->api->queue($track_uri);
+    }
+
+    /**
      * Set the SpotifyWebAPI object to use.
      *
      * @return void

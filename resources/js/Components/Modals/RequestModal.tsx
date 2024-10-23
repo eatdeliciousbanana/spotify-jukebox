@@ -1,5 +1,6 @@
 import { Track } from "@/types";
 import { msToSec } from "@/utils";
+import { Link } from "@inertiajs/react";
 import Modal from "@/Components/Modals/Modal";
 
 interface RequestModalProps {
@@ -45,12 +46,17 @@ const RequestModal = ({ show, track, onClose }: RequestModalProps) => {
                     >
                         Cancel
                     </button>
-                    <button
+                    <Link
+                        href={route("queue.store")}
+                        method="post"
+                        data={{ uri: track?.uri }}
+                        as="button"
                         type="button"
+                        onClick={onClose}
                         className="ms-3 rounded-md bg-primary py-3 px-7 sm:px-10 text-center font-medium text-white hover:bg-opacity-90"
                     >
                         Request
-                    </button>
+                    </Link>
                 </div>
             </div>
         </Modal>
