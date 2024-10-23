@@ -91,7 +91,31 @@ class SpotifyApi
      */
     public function getMyCurrentPlaybackInfo(): array|object|null
     {
-        return $this->api->getMyCurrentPlaybackInfo();
+        $response = Cache::get('spotify_playback');
+
+        if (empty($response)) {
+            $response = $this->api->getMyCurrentPlaybackInfo();
+
+            if (empty($response)) {
+
+                // if nothing is played back, cache empty response for 5 minutes
+                Cache::put('spotify_playback', 'empty_response', 300);
+
+            } else {
+
+                $progress_ms = $response->progress_ms;
+                $duration_ms = $response->item->duration_ms;
+                $expires_in = intval(($duration_ms - $progress_ms) / 1000);
+
+                // cache response until end of currently playing track
+                Cache::put('spotify_playback', $response, $expires_in);
+            }
+
+        } else if ($response === 'empty_response') {
+            $response = null;
+        }
+
+        return $response;
     }
 
     /**
@@ -101,7 +125,16 @@ class SpotifyApi
      */
     public function getMyQueue()
     {
-        return $this->api->getMyQueue();
+        $response = Cache::get('spotify_queue');
+
+        if (empty($response)) {
+            $response = $this->api->getMyQueue();
+
+            // cache response for 30 minutes to reduce api calls
+            Cache::put('spotify_queue', $response, 1800);
+        }
+
+        return $response;
     }
 
     /**
@@ -111,7 +144,16 @@ class SpotifyApi
       */
     public function getMyRecentTracks(): array|object
     {
-        return $this->api->getMyRecentTracks();
+        $response = Cache::get('spotify_recent');
+
+        if (empty($response)) {
+            $response = $this->api->getMyRecentTracks();
+
+            // cache response for 30 minutes to reduce api calls
+            Cache::put('spotify_recent', $response, 1800);
+        }
+
+        return $response;
     }
 
     /**
@@ -123,6 +165,9 @@ class SpotifyApi
      */
     public function queue(string $track_uri): bool
     {
+        // clear cache so that the latest data can be retrieved
+        Cache::forget('spotify_queue');
+
         return $this->api->queue($track_uri);
     }
 
