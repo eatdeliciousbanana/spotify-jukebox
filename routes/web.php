@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('spotify-login', [SpotifyLoginController::class, 'index'])->name('spotifyLogin.index');
+
 Route::get('/auth/spotify', [SpotifyLoginController::class, 'redirectToSpotify'])
     ->name('login.spotify');
 
