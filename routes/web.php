@@ -44,5 +44,10 @@ Route::get('/album/{id}', [AlbumController::class, 'show'])->name('album.show');
 Route::post('/queue', [QueueController::class, 'store'])->name('queue.store');
 
 Route::get('/player', [PlayerController::class, 'index'])->name('player.index');
+Route::post('/player/play', [PlayerController::class, 'play'])->name('player.play');
+Route::post('/player/pause', [PlayerController::class, 'pause'])->name('player.pause');
+Route::post('/player/previous', [PlayerController::class, 'previous'])->name('player.previous');
+Route::post('/player/next', [PlayerController::class, 'next'])->name('player.next');
+Route::post('/player/change-volume', [PlayerController::class, 'changeVolume'])->name('player.changeVolume');
 
 require __DIR__.'/auth.php';

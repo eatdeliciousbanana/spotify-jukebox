@@ -165,7 +165,7 @@ class SpotifyApi
      */
     public function queue(string $track_uri): bool
     {
-        // clear cache so that the latest data can be retrieved
+        // clear cache to retrieve latest data
         Cache::forget('spotify_queue');
 
         return $this->api->queue($track_uri);
@@ -179,6 +179,60 @@ class SpotifyApi
     public function getMyDevices(): array|object
     {
         return $this->api->getMyDevices();
+    }
+
+    /**
+     * Start playback for the current user.
+     *
+     * @return bool Whether the playback was successfully started.
+     */
+    public function play(): bool
+    {
+        return $this->api->play();
+    }
+
+    /**
+     * Pause playback for the current user.
+     *
+     * @return bool Whether the playback was successfully paused.
+     */
+    public function pause(): bool
+    {
+        return $this->api->pause();
+    }
+
+    /**
+     * Play the previous track in the current users's queue.
+     *
+     * @return bool Whether the track was successfully skipped.
+     */
+    public function previous(): bool
+    {
+        return $this->api->previous();
+    }
+
+    /**
+     * Play the next track in the current users's queue.
+     *
+     * @return bool Whether the track was successfully skipped.
+     */
+    public function next(): bool
+    {
+        return $this->api->next();
+    }
+
+    /**
+     * Change playback volume for the current user.
+     *
+     * @param int $volume_percent Required. The volume to set.
+     *
+     * @return bool Whether the playback volume was successfully changed.
+     */
+    public function changeVolume(int $volume_percent): bool
+    {
+        return $this->api->changeVolume([
+            'volume_percent' => $volume_percent,
+        ]);
     }
 
     /**

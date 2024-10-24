@@ -169,6 +169,28 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                     Search
                                 </Link>
                             </li>
+
+                            <li>
+                                <Link
+                                    href={route("player.index")}
+                                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                                        url.startsWith("/player") &&
+                                        "bg-graydark dark:bg-meta-4"
+                                    }`}
+                                >
+                                    <svg
+                                        className="fill-current"
+                                        width="18"
+                                        height="18"
+                                        viewBox="0 -960 960 960"
+                                        fill="#dee4ee"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path d="M680-80H280q-33 0-56.5-23.5T200-160v-640q0-33 23.5-56.5T280-880h400q33 0 56.5 23.5T760-800v640q0 33-23.5 56.5T680-80Zm0-80v-640H280v640h400ZM480-600q33 0 56.5-23.5T560-680q0-33-23.5-56.5T480-760q-33 0-56.5 23.5T400-680q0 33 23.5 56.5T480-600Zm0 400q66 0 113-47t47-113q0-66-47-113t-113-47q-66 0-113 47t-47 113q0 66 47 113t113 47Zm0-80q-33 0-56.5-23.5T400-360q0-33 23.5-56.5T480-440q33 0 56.5 23.5T560-360q0 33-23.5 56.5T480-280ZM280-800v640-640Z" />
+                                    </svg>
+                                    Player
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </nav>
