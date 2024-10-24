@@ -1,4 +1,5 @@
 import { Device } from "@/types";
+import { Link, router } from "@inertiajs/react";
 
 interface DeviceCardProps {
     device: Device;
@@ -39,96 +40,120 @@ const DeviceCard = ({ device }: DeviceCardProps) => {
                     {device.name}
                 </h4>
             </div>
-            <div className="mt-6 flex">
-                <button
-                    type="button"
-                    className={
-                        "inline-flex justify-center rounded-tl-lg border py-2 px-6 w-1/2 border-stroke hover:bg-green-300 dark:border-strokedark dark:hover:bg-green-400"
-                    }
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="28px"
-                        viewBox="0 -960 960 960"
-                        width="28px"
-                        fill="#5f6368"
-                    >
-                        <path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z" />
-                    </svg>
-                </button>
-                <button
-                    type="button"
-                    className={
-                        "inline-flex justify-center rounded-tr-lg border border-l-0 py-2 px-6 w-1/2 border-stroke hover:bg-red-300 dark:border-strokedark dark:hover:bg-red-400"
-                    }
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="28px"
-                        viewBox="0 -960 960 960"
-                        width="28px"
-                        fill="#5f6368"
-                    >
-                        <path d="M320-640v320-320Zm-80 400v-480h480v480H240Zm80-80h320v-320H320v320Z" />
-                    </svg>
-                </button>
-            </div>
-            <div className="flex">
-                <button
-                    type="button"
-                    className={
-                        "inline-flex justify-center rounded-bl-lg border border-t-0 py-2 px-6 w-1/2 border-stroke hover:bg-gray-200 dark:border-strokedark dark:hover:bg-gray-300"
-                    }
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="28px"
-                        viewBox="0 -960 960 960"
-                        width="28px"
-                        fill="#5f6368"
-                    >
-                        <path d="M220-240v-480h80v480h-80Zm520 0L380-480l360-240v480Zm-80-240Zm0 90v-180l-136 90 136 90Z" />
-                    </svg>
-                </button>
-                <button
-                    type="button"
-                    className={
-                        "inline-flex justify-center rounded-br-lg border-r border-b py-2 px-6 w-1/2 border-stroke hover:bg-gray-200 dark:border-strokedark dark:hover:bg-gray-300"
-                    }
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="28px"
-                        viewBox="0 -960 960 960"
-                        width="28px"
-                        fill="#5f6368"
-                    >
-                        <path d="M660-240v-480h80v480h-80Zm-440 0v-480l360 240-360 240Zm80-240Zm0 90 136-90-136-90v180Z" />
-                    </svg>
-                </button>
-            </div>
-            <div className="mt-6 flex">
-                <div className="pr-2">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#5f6368"
-                    >
-                        <path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z" />
-                    </svg>
-                </div>
-                <div className="flex items-center w-full">
-                    <input
-                        className="w-11/12"
-                        type="range"
-                        min="0"
-                        max="100"
-                        defaultValue={device.volume_percent}
-                    />
-                </div>
-            </div>
+            {device.is_active &&
+            !device.is_private_session &&
+            !device.is_restricted ? (
+                <>
+                    <div className="mt-6 flex">
+                        <Link
+                            href={route("player.play")}
+                            method="post"
+                            as="button"
+                            type="button"
+                            className="inline-flex justify-center rounded-tl-lg border py-2 px-6 w-1/2 border-stroke hover:bg-green-300 dark:border-strokedark dark:hover:bg-green-400"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="28px"
+                                viewBox="0 -960 960 960"
+                                width="28px"
+                                fill="#5f6368"
+                            >
+                                <path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z" />
+                            </svg>
+                        </Link>
+                        <Link
+                            href={route("player.pause")}
+                            method="post"
+                            as="button"
+                            type="button"
+                            className="inline-flex justify-center rounded-tr-lg border border-l-0 py-2 px-6 w-1/2 border-stroke hover:bg-red-300 dark:border-strokedark dark:hover:bg-red-400"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="28px"
+                                viewBox="0 -960 960 960"
+                                width="28px"
+                                fill="#5f6368"
+                            >
+                                <path d="M320-640v320-320Zm-80 400v-480h480v480H240Zm80-80h320v-320H320v320Z" />
+                            </svg>
+                        </Link>
+                    </div>
+                    <div className="flex">
+                        <Link
+                            href={route("player.previous")}
+                            method="post"
+                            as="button"
+                            type="button"
+                            className="inline-flex justify-center rounded-bl-lg border border-t-0 py-2 px-6 w-1/2 border-stroke hover:bg-gray-200 dark:border-strokedark dark:hover:bg-gray-300"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="28px"
+                                viewBox="0 -960 960 960"
+                                width="28px"
+                                fill="#5f6368"
+                            >
+                                <path d="M220-240v-480h80v480h-80Zm520 0L380-480l360-240v480Zm-80-240Zm0 90v-180l-136 90 136 90Z" />
+                            </svg>
+                        </Link>
+                        <Link
+                            href={route("player.next")}
+                            method="post"
+                            as="button"
+                            type="button"
+                            className="inline-flex justify-center rounded-br-lg border-r border-b py-2 px-6 w-1/2 border-stroke hover:bg-gray-200 dark:border-strokedark dark:hover:bg-gray-300"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="28px"
+                                viewBox="0 -960 960 960"
+                                width="28px"
+                                fill="#5f6368"
+                            >
+                                <path d="M660-240v-480h80v480h-80Zm-440 0v-480l360 240-360 240Zm80-240Zm0 90 136-90-136-90v180Z" />
+                            </svg>
+                        </Link>
+                    </div>
+                    {device.supports_volume && (
+                        <div className="mt-6 flex">
+                            <div className="pr-2">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24px"
+                                    viewBox="0 -960 960 960"
+                                    width="24px"
+                                    fill="#5f6368"
+                                >
+                                    <path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z" />
+                                </svg>
+                            </div>
+                            <div className="flex items-center w-full">
+                                <input
+                                    className="w-11/12"
+                                    type="range"
+                                    min="0"
+                                    max="100"
+                                    defaultValue={device.volume_percent}
+                                    onMouseUp={(e) =>
+                                        router.post(
+                                            route("player.changeVolume"),
+                                            {
+                                                volume_percent: (
+                                                    e.target as HTMLInputElement
+                                                ).value,
+                                            }
+                                        )
+                                    }
+                                />
+                            </div>
+                        </div>
+                    )}
+                </>
+            ) : (
+                <span className="text-base font-medium">Device not active</span>
+            )}
         </div>
     );
 };

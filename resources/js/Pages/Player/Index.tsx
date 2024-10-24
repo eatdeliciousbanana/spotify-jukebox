@@ -8,7 +8,6 @@ interface IndexProps {
 }
 
 const Index = ({ devices }: IndexProps) => {
-    console.log(devices);
     return (
         <>
             {devices.length > 0 ? (

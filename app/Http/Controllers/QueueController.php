@@ -19,7 +19,7 @@ class QueueController extends Controller
         $uri = $request->input('uri');
 
         try {
-            // this method always returns false, so ignore the return value
+            // return value is unreliable, so ignore it
             $this->api->queue($uri);
             $result = true;
         } catch (\Exception $e) {

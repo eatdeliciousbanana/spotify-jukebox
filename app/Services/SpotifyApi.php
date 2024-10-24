@@ -188,6 +188,8 @@ class SpotifyApi
      */
     public function play(): bool
     {
+        $this->clearCache();
+
         return $this->api->play();
     }
 
@@ -198,6 +200,8 @@ class SpotifyApi
      */
     public function pause(): bool
     {
+        $this->clearCache();
+
         return $this->api->pause();
     }
 
@@ -208,6 +212,8 @@ class SpotifyApi
      */
     public function previous(): bool
     {
+        $this->clearCache();
+
         return $this->api->previous();
     }
 
@@ -218,21 +224,32 @@ class SpotifyApi
      */
     public function next(): bool
     {
+        $this->clearCache();
+
         return $this->api->next();
     }
 
     /**
      * Change playback volume for the current user.
      *
-     * @param int $volume_percent Required. The volume to set.
+     * @param array|object $options Optional. Options for the playback volume.
+     * - int volume_percent Required. The volume to set.
      *
      * @return bool Whether the playback volume was successfully changed.
      */
-    public function changeVolume(int $volume_percent): bool
+    public function changeVolume(array|object $options): bool
     {
-        return $this->api->changeVolume([
-            'volume_percent' => $volume_percent,
-        ]);
+        return $this->api->changeVolume($options);
+    }
+
+    /**
+     * Clear cache to retrieve latest data.
+     */
+    public function clearCache()
+    {
+        Cache::forget('spotify_playback');
+        Cache::forget('spotify_queue');
+        Cache::forget('spotify_recent');
     }
 
     /**
