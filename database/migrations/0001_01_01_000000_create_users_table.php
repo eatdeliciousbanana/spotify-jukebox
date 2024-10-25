@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('google_id')->unique();
             $table->string('name');
             $table->string('avatar');
+            $table->integer('role');
             $table->timestamps();
         });
 

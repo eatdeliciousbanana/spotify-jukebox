@@ -32,7 +32,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user() ? $request->user()->only('name', 'avatar') : null,
+                'user' => $request->user() ? $request->user()->only('name', 'avatar', 'role') : null,
             ],
             'flash' => function () use ($request) {
                 return [
