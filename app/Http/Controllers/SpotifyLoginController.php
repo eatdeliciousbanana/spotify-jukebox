@@ -32,6 +32,6 @@ class SpotifyLoginController extends Controller
     {
         $this->session->handleCallback();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('spotifyLogin.index');
     }
 }
