@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, usePage } from "@inertiajs/react";
-import Logo from "@/images/logo/logo.svg";
+import LogoIcon from "@/images/logo/logo-icon.svg";
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -67,7 +67,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         >
             <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
                 <Link href={route("dashboard")}>
-                    <img src={Logo} alt="Logo" />
+                    <div className="flex items-center">
+                        <img src={LogoIcon} alt="Logo" />
+                        <span className="pl-3 text-xl font-bold text-bodydark1">
+                            Spotify Jukebox
+                        </span>
+                    </div>
                 </Link>
 
                 <button
